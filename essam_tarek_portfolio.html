@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Essam Tarek — Network Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0d12;
+    --bg2: #111520;
+    --bg3: #181e2d;
+    --accent: #00e5a0;
+    --accent2: #0077ff;
+    --text: #e8edf5;
+    --muted: #7a8599;
+    --border: rgba(255,255,255,0.07);
+    --card-bg: rgba(255,255,255,0.03);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* GRID BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,160,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,160,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(10,13,18,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-content { max-width: 680px; }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,229,160,0.08);
+    border: 1px solid rgba(0,229,160,0.2);
+    border-radius: 100px;
+    padding: 4px 14px;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 span { color: var(--accent); }
+
+  .hero-desc {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 500px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #0a0d12;
+    font-weight: 700;
+  }
+
+  .btn-primary:hover { background: #00ffb3; transform: translateY(-1px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* SECTIONS */
+  section {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 4rem;
+  }
+
+  .section-label {
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .skill-card:hover {
+    border-color: rgba(0,229,160,0.3);
+    transform: translateY(-2px);
+  }
+
+  .skill-card-icon {
+    font-size: 24px;
+    margin-bottom: 1rem;
+  }
+
+  .skill-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--text);
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    background: rgba(0,119,255,0.1);
+    border: 1px solid rgba(0,119,255,0.2);
+    color: #6ab4ff;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    letter-spacing: 0.05em;
+  }
+
+  .tag.green {
+    background: rgba(0,229,160,0.08);
+    border-color: rgba(0,229,160,0.2);
+    color: var(--accent);
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+
+  .project-card:hover { border-color: rgba(0,229,160,0.3); }
+
+  .project-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: rgba(0,229,160,0.08);
+    position: absolute;
+    top: 1rem; right: 1.5rem;
+    line-height: 1;
+  }
+
+  .project-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    padding-right: 3rem;
+  }
+
+  .project-card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+  }
+
+  /* CERTS */
+  .certs-list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .cert-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    transition: border-color 0.2s;
+  }
+
+  .cert-item:hover { border-color: rgba(0,229,160,0.2); }
+
+  .cert-icon {
+    width: 44px; height: 44px;
+    background: rgba(0,229,160,0.08);
+    border: 1px solid rgba(0,229,160,0.15);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .cert-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+  }
+
+  .cert-org {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .cert-badge {
+    margin-left: auto;
+    background: rgba(0,229,160,0.08);
+    border: 1px solid rgba(0,229,160,0.15);
+    color: var(--accent);
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .contact-info { display: grid; gap: 1rem; }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s;
+  }
+
+  .contact-link:hover {
+    border-color: rgba(0,229,160,0.3);
+    color: var(--accent);
+  }
+
+  .contact-link-icon {
+    width: 36px; height: 36px;
+    background: rgba(0,119,255,0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .contact-text small {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+  }
+
+  .contact-text span {
+    font-size: 13px;
+    display: block;
+  }
+
+  .contact-aside {
+    padding: 2rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+
+  .contact-aside p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem 4rem 3rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  /* DIVIDER */
+  .divider {
+    position: relative;
+    z-index: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ANIMATIONS */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.6s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in:nth-child(1) { animation-delay: 0.1s; }
+  .fade-in:nth-child(2) { animation-delay: 0.2s; }
+  .fade-in:nth-child(3) { animation-delay: 0.3s; }
+  .fade-in:nth-child(4) { animation-delay: 0.4s; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero, section { padding: 6rem 1.5rem 3rem; }
+    .hero h1 { font-size: 2.8rem; }
+    .hero-stats { gap: 1.5rem; }
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">ET.</a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certs">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-tag fade-in">Available for hire</div>
+    <h1 class="fade-in">Essam<br><span>Tarek</span></h1>
+    <p class="hero-desc fade-in">
+      Network Engineer & CS Final-Year Student. CCNA/CCNP certified,
+      specializing in network infrastructure, cybersecurity, and cloud.
+      Based in Sadat City, Egypt.
+    </p>
+    <div class="hero-cta fade-in">
+      <a href="#contact" class="btn btn-primary">Get in Touch</a>
+      <a href="#projects" class="btn btn-outline">View Projects</a>
+    </div>
+    <div class="hero-stats fade-in">
+      <div>
+        <span class="stat-num">4+</span>
+        <span class="stat-label">Certifications</span>
+      </div>
+      <div>
+        <span class="stat-num">6mo</span>
+        <span class="stat-label">Internship</span>
+      </div>
+      <div>
+        <span class="stat-num">4</span>
+        <span class="stat-label">Projects</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Expertise</div>
+  <div class="section-title">Technical Skills</div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-card-icon">🌐</div>
+      <h3>Networking</h3>
+      <div class="skill-tags">
+        <span class="tag green">CCNA</span>
+        <span class="tag green">CCNP</span>
+        <span class="tag">BGP</span>
+        <span class="tag">MPLS</span>
+        <span class="tag">TCP/IP</span>
+        <span class="tag">VLANs</span>
+        <span class="tag">OSPF</span>
+        <span class="tag">Routing & Switching</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">🔒</div>
+      <h3>Security</h3>
+      <div class="skill-tags">
+        <span class="tag green">FortiGate</span>
+        <span class="tag green">VPN</span>
+        <span class="tag">IPS/IDS</span>
+        <span class="tag">Firewall</span>
+        <span class="tag">NAC</span>
+        <span class="tag">Web Filtering</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">☁️</div>
+      <h3>Cloud & OS</h3>
+      <div class="skill-tags">
+        <span class="tag green">AWS Cloud</span>
+        <span class="tag">Windows Server</span>
+        <span class="tag">MCSA</span>
+        <span class="tag">Linux</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">💻</div>
+      <h3>Dev & Tools</h3>
+      <div class="skill-tags">
+        <span class="tag green">Python</span>
+        <span class="tag green">Wireshark</span>
+        <span class="tag">GNS3</span>
+        <span class="tag">Packet Tracer</span>
+        <span class="tag">SQL</span>
+        <span class="tag">FortiClient</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Work</div>
+  <div class="section-title">Projects</div>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-num">01</div>
+      <h3>Enterprise Network Simulation</h3>
+      <p>Designed and simulated a full enterprise network topology using Cisco Packet Tracer, implementing VLANs, OSPF, and BGP routing protocols.</p>
+      <div class="skill-tags">
+        <span class="tag green">Packet Tracer</span>
+        <span class="tag">OSPF</span>
+        <span class="tag">BGP</span>
+        <span class="tag">VLANs</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">02</div>
+      <h3>FortiGate Firewall Config</h3>
+      <p>Configured FortiGate firewall policies including application control, web filtering, and site-to-site VPN between network segments.</p>
+      <div class="skill-tags">
+        <span class="tag green">FortiGate</span>
+        <span class="tag">VPN</span>
+        <span class="tag">App Control</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">03</div>
+      <h3>Network Automation Scripts</h3>
+      <p>Developed Python scripts for basic network automation tasks including configuration management and data parsing for network devices.</p>
+      <div class="skill-tags">
+        <span class="tag green">Python</span>
+        <span class="tag">Automation</span>
+        <span class="tag">Scripting</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">04</div>
+      <h3>Student Management Database</h3>
+      <p>Designed a relational database schema and implemented SQL queries for a complete student management system as an academic project.</p>
+      <div class="skill-tags">
+        <span class="tag green">SQL</span>
+        <span class="tag">DB Design</span>
+        <span class="tag">Relational Schema</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <div class="section-label">Credentials</div>
+  <div class="section-title">Certifications & Training</div>
+  <div class="certs-list">
+    <div class="cert-item">
+      <div class="cert-icon">🔵</div>
+      <div>
+        <div class="cert-name">CCNA — Cisco Certified Network Associate</div>
+        <div class="cert-org">Instant Company — Network & Security Professional Program</div>
+      </div>
+      <div class="cert-badge">Cisco</div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-icon">🟦</div>
+      <div>
+        <div class="cert-name">CCNP — Cisco Certified Network Professional</div>
+        <div class="cert-org">Instant Company — incl. BGP & MPLS</div>
+      </div>
+      <div class="cert-badge">Cisco</div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-icon">🛡️</div>
+      <div>
+        <div class="cert-name">FortiGate Security (NSE) — Fortinet</div>
+        <div class="cert-org">NTI — National Telecom Institute · 2-Month Course</div>
+      </div>
+      <div class="cert-badge">Fortinet</div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-icon">🪟</div>
+      <div>
+        <div class="cert-name">MCSA — Microsoft Certified Solutions Associate</div>
+        <div class="cert-org">Instant Company — Windows Server Administration</div>
+      </div>
+      <div class="cert-badge">Microsoft</div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-icon">☁️</div>
+      <div>
+        <div class="cert-name">Cloud Computing — AWS</div>
+        <div class="cert-org">Instant Company — Cloud Infrastructure Fundamentals</div>
+      </div>
+      <div class="cert-badge">AWS</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Let's Connect</div>
+  <div class="section-title">Contact</div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <a href="mailto:essamshokr8@gmail.com" class="contact-link">
+        <div class="contact-link-icon">✉️</div>
+        <div class="contact-text">
+          <small>Email</small>
+          <span>essamshokr8@gmail.com</span>
+        </div>
+      </a>
+      <a href="tel:+201013597727" class="contact-link">
+        <div class="contact-link-icon">📱</div>
+        <div class="contact-text">
+          <small>Phone</small>
+          <span>+20 101 359 7727</span>
+        </div>
+      </a>
+      <div class="contact-link" style="cursor: default;">
+        <div class="contact-link-icon">📍</div>
+        <div class="contact-text">
+          <small>Location</small>
+          <span>Sadat City, Menoufia, Egypt</span>
+        </div>
+      </div>
+    </div>
+    <div class="contact-aside">
+      <p>
+        Final-year CS student actively looking for an entry-level networking
+        or IT infrastructure role. Hands-on with Cisco, FortiGate, AWS, and Python automation.
+        Ready to contribute from day one.
+      </p>
+      <a href="mailto:essamshokr8@gmail.com" class="btn btn-primary" style="width: 100%; justify-content: center;">
+        ✉ Send Email
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Essam Tarek Abdelatif Mohamed · Network Engineer</p>
+</footer>
+
+</body>
+</html>
